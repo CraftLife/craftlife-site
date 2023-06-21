@@ -11,7 +11,7 @@ export default defineNuxtConfig({
         {
           name: 'keywords',
           content:
-            'Servidor de Minecraft Brasileiro, Servidor de Minecraft 1.15.2, Survival, PVP, Creative, EggWars, SkyWars, SkyBlock, KitPVP, Como jogar Minecraft Online, Servidor de minecraft ultima versao, servidor mcpe brasileiro'
+            'Servidor de Minecraft Brasileiro, Servidor de Minecraft 1.20.1, Survival, PVP, Creative, EggWars, SkyWars, SkyBlock, KitPVP, Como jogar Minecraft Online, Servidor de minecraft ultima versao, servidor mcpe brasileiro'
         }
       ],
       script: ['https://unpkg.com/@phosphor-icons/web']
