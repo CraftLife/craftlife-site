@@ -1,0 +1,21 @@
+{
+  "folders": [
+    {
+      "path": "./",
+      "name": "Craftlife - Front"
+    }
+  ],
+  "settings": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.singleQuote": true,
+    "prettier.semi": false,
+    "prettier.printWidth": 120,
+    "prettier.trailingComma": "none"
+  },
+  "extensions": {
+    "recommendations": ["Vue.volar", "hollowtree.vue-snippets", "dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
+  }
+}
