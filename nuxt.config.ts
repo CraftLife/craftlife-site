@@ -17,6 +17,11 @@ export default defineNuxtConfig({
       script: ['https://unpkg.com/@phosphor-icons/web']
     }
   },
+  runtimeConfig: {
+    public: {
+      baseURL: process.env.BASE_URL || 'http://localhost:8080'
+    }
+  },
   devtools: { enabled: true },
   modules: ['@sidebase/nuxt-auth', '@nuxtjs/tailwindcss'],
   auth: {

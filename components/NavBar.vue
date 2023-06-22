@@ -6,13 +6,19 @@
         <i class="ph ph-crown text-3xl"></i>
         <div>
           <h2 class="font-bold text-xl">jogar.craftlife.com.br</h2>
-          <span class="text-gray-100">123 Jogadores online!</span>
+          <div v-if="pending" class="animate-pulse flex-1 my-1 h-4 bg-slate-200 rounded"></div>
+          <span v-else-if="data?.server" class="text-gray-100"
+            >{{ data?.server.players.online }} Jogadores online!</span
+          >
         </div>
       </div>
       <div class="flex items-center text-white bg-pink-400 bg-opacity-50 rounded-xl px-4 py-2 space-x-4">
         <div>
           <h2 class="font-bold text-xl">Discord CraftLife</h2>
-          <span class="text-gray-100">250 Membros online!</span>
+          <div v-if="pending" class="animate-pulse flex-1 my-1 h-4 bg-slate-200 rounded"></div>
+          <span v-else-if="data?.discord" class="text-gray-100"
+            >{{ data?.discord.presence_count }} Membros online!</span
+          >
         </div>
         <i class="ph ph-discord-logo text-3xl"></i>
       </div>
@@ -57,6 +63,8 @@
 <script lang="ts" setup>
 const { signOut, getSession } = useAuth()
 let session = await getSession()
+
+const { pending, data } = useApiFetch('/server/status')
 
 async function logout() {
   signOut({ callbackUrl: '/' })
