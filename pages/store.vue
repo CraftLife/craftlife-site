@@ -137,9 +137,12 @@
 import beneficiosSessoes from '@/data/vantagens-vip.json'
 
 const config = useRuntimeConfig()
+let mp: any
+onMounted(() => {
+  // @ts-ignore
+  mp = new MercadoPago(config.public.mercadopagoPublicKey)
+})
 
-// @ts-ignore
-const mp = new MercadoPago(config.public.mercadopagoPublicKey)
 const selectedProduct = ref('')
 const modalVisible = ref(false)
 const username = ref('')
@@ -150,7 +153,7 @@ watch(selectedProduct, () => {
 
 async function openCheckoutModal() {
   modalVisible.value = false
-  const { pending, data } = await useApiFetch('/checkout', {
+  const { pending, data }: any = await useApiFetch('/checkout', {
     method: 'POST',
     body: {
       username: username.value,
