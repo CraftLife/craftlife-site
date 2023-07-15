@@ -20,7 +20,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       baseURL: process.env.BASE_URL || 'http://localhost:8080',
-      mercadopagoPublicKey: 'APP_USR-4b1cbcc0-6b15-4984-af69-4832390959ca'
+      mercadopagoPublicKey: process.env.MP_PUBLIC_KEY || 'TEST-b458e1da-14d4-447e-8aaf-529ab34b27ca'
     }
   },
   devtools: { enabled: true },
@@ -30,8 +30,9 @@ export default defineNuxtConfig({
       type: 'local',
       pages: {
         login: '/login'
-      }
+      },
+      sessionDataType: { email: 'string', username: 'string', roles: 'string[]' }
     },
-    baseURL: 'http://localhost:8080/auth'
+    baseURL: (process.env.BASE_URL || 'http://localhost:8080') + '/auth'
   }
 })
