@@ -50,11 +50,10 @@
         </button>
       </div>
       <div v-else class="space-x-4">
-        <!-- <NuxtLink class="flex items-center bg-pink-400 text-white rounded-lg space-x-2 px-4 py-2" to="/login">
+        <NuxtLink class="flex items-center bg-pink-400 text-white rounded-lg space-x-2 px-4 py-2" to="/login">
           <span>Entrar</span>
           <i class="ph ph-sign-in" />
-        </NuxtLink> -->
-        <!-- <a href="/login">Registrar</a> -->
+        </NuxtLink>
       </div>
     </div>
   </nav>
@@ -64,7 +63,7 @@
 const { signOut, getSession } = useAuth()
 let session = await getSession()
 
-const { pending, data } = useApiFetch('/server/status')
+const { pending, data }: any = useApiFetch('/server/status')
 
 async function logout() {
   signOut({ callbackUrl: '/' })
