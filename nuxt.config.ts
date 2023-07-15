@@ -34,6 +34,6 @@ export default defineNuxtConfig({
 
       sessionDataType: { email: 'string', username: 'string', roles: 'string[]' }
     },
-    baseURL: 'http://localhost:8080/auth'
+    baseURL: process.env.BASE_URL + '/auth' || 'http://localhost:8080/auth'
   }
 })
