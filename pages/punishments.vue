@@ -30,5 +30,5 @@ const { pending, data: punishmentsResponse } = useApiFetch('/punishment/bans', {
   }
 })
 
-const onPage = () => {}
+const onPage = (event) => {}
 </script>
