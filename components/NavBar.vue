@@ -7,8 +7,8 @@
         <div>
           <h2 class="font-bold text-xl">jogar.craftlife.com.br</h2>
           <div v-if="pending" class="animate-pulse flex-1 my-1 h-4 bg-slate-200 rounded"></div>
-          <span v-else-if="data?.server" class="text-gray-100"
-            >{{ data?.server.players.online }} Jogadores online!</span
+          <span v-else-if="serverStatus?.server" class="text-gray-100"
+            >{{ serverStatus?.server.players.online }} Jogadores online!</span
           >
         </div>
       </div>
@@ -16,8 +16,8 @@
         <div>
           <h2 class="font-bold text-xl">Discord CraftLife</h2>
           <div v-if="pending" class="animate-pulse flex-1 my-1 h-4 bg-slate-200 rounded"></div>
-          <span v-else-if="data?.discord" class="text-gray-100"
-            >{{ data?.discord.presence_count }} Membros online!</span
+          <span v-else-if="serverStatus?.discord" class="text-gray-100"
+            >{{ serverStatus?.discord.presence_count }} Membros online!</span
           >
         </div>
         <i class="ph ph-discord-logo text-3xl"></i>
@@ -38,11 +38,11 @@
           >
         </li>
       </ul>
-      <div v-if="session" class="flex space-x-4">
+      <div v-if="data" class="flex space-x-4">
         <div class="flex items-center">
-          <img class="w-10 rounded-l-md" :src="`https://mineskin.eu/helm/${session.username}/64.svg`" />
+          <img class="w-10 rounded-l-md" :src="`https://mineskin.eu/helm/${data.username}/64.svg`" />
           <button class="bg-pink-400 text-white px-4 py-2 rounded-r-md">
-            {{ session.username }}
+            {{ data.username }}
           </button>
         </div>
         <button class="px-2" @click="logout()">
@@ -60,14 +60,12 @@
 </template>
 
 <script lang="ts" setup>
-const { signOut, getSession } = useAuth()
-let session = await getSession()
+const { signOut, data } = useAuth()
 
-const { pending, data }: any = useApiFetch('/server/status')
+const { pending, data: serverStatus }: any = useApiFetch('/server/status')
 
 async function logout() {
   signOut({ callbackUrl: '/' })
-  session = await getSession()
 }
 
 const links = [
@@ -82,7 +80,7 @@ const links = [
 const computedLinks = computed(() => {
   return links.filter((link) => {
     if (!link.roles) return true
-    return link.roles.some((role) => session?.roles.includes(role))
+    return link.roles.some((role) => data.value?.roles.includes(role))
   })
 })
 </script>
