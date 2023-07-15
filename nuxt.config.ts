@@ -23,6 +23,15 @@ export default defineNuxtConfig({
       mercadopagoPublicKey: process.env.MP_PUBLIC_KEY || 'TEST-b458e1da-14d4-447e-8aaf-529ab34b27ca'
     }
   },
+  css: [
+    'primevue/resources/themes/saga-blue/theme.css',
+    'primevue/resources/primevue.css'
+    // 'primeicons/primeicons.css',
+    // 'primeflex/primeflex.css'
+  ],
+  build: {
+    transpile: ['primevue']
+  },
   devtools: { enabled: true },
   modules: ['@sidebase/nuxt-auth', '@nuxtjs/tailwindcss'],
   auth: {
@@ -34,5 +43,6 @@ export default defineNuxtConfig({
       sessionDataType: { email: 'string', username: 'string', roles: 'string[]' }
     },
     baseURL: (process.env.BASE_URL || 'http://localhost:8080') + '/auth'
-  }
+  },
+  ssr: false
 })
