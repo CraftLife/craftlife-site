@@ -6,8 +6,13 @@
         <div>Site desenvolvido por <a href="https://www.brunodsr.com" class="text-pink-500">Bruno Rodrigues</a>.</div>
       </div>
       <div class="flex justify-end items-center space-x-4">
-        <i class="ph-bold ph-facebook-logo text-3xl"></i>
-        <i class="ph-bold ph-instagram-logo text-3xl"></i>
+        <!-- <a href="https://www.instagram.com/svcraftlife/" target="_blank">
+          <i class="ph-bold ph-facebook-logo text-3xl"></i>
+        </a> -->
+
+        <a href="https://www.instagram.com/svcraftlife/" target="_blank">
+          <i class="ph-bold ph-instagram-logo text-3xl"></i>
+        </a>
       </div>
     </div>
   </div>

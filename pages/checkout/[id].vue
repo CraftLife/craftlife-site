@@ -1,12 +1,12 @@
 <template>
   <div class="bg-gray-50 rounded-xl shadow-xl">
     <div class="grid grid-cols-1 sm:grid-cols-12">
-      <div class="sm:col-span-7 p-4">
+      <div class="sm:col-span-6 p-4">
         <h1 class="text-2xl mb-2">Seguir para o pagamento</h1>
-        <p class="text-sm text-gray-600">
+        <p class="text-sm text-gray-600 mb-4">
           Para completar o seu pagamento preencha os dados pessoais e prossiga para o checkout do mercadopago!
         </p>
-        <form class="grid gap-x-4 grid-cols-2 max-w-sm" @submit.prevent="pagar">
+        <form class="grid gap-x-4 grid-cols-2 sm:max-w-md" @submit.prevent="pagar">
           <FormInputText v-model="form.name" id="name" label="Nome" />
           <FormInputText v-model="form.surname" id="surname" label="Sobrenome" />
           <FormInputText v-model="form.ign" id="ign" label="Nome no jogo" icon-class="ph ph-user" />
@@ -24,7 +24,7 @@
           </button>
         </form>
       </div>
-      <CheckoutDetailsCard class="sm:col-span-5" :price="vip?.price" :name="vip?.name" />
+      <CheckoutDetailsCard class="sm:col-span-6 justify-self-end" :price="vip?.price" :name="vip?.name" />
     </div>
   </div>
 </template>
