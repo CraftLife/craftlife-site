@@ -1,0 +1,103 @@
+[
+  {
+    "id": "5ab3bc1c-e366-4b87-a460-90ce763a6bef",
+    "name": "VIP OURO",
+    "iconClass": "text-amber-200",
+    "price": 15,
+    "features": [
+      {
+        "description": "Chat exclusivo no servidor",
+        "details": "",
+        "has": true
+      },
+      {
+        "description": "Voar nos principais locais do servidor",
+        "details": "",
+        "has": true
+      },
+      {
+        "description": "Acesso a locais exclusivos",
+        "details": "",
+        "has": true
+      },
+      {
+        "description": "Permissão para criar lojas",
+        "details": "",
+        "has": false
+      },
+      {
+        "description": "Chance de dropar spawner",
+        "details": "",
+        "has": false
+      }
+    ]
+  },
+  {
+    "id": "ecfd20bf-080c-4c08-a8be-e0432085da14",
+    "name": "VIP DIAMANTE",
+    "label": "Mais vendido",
+    "iconClass": "text-cyan-400",
+    "price": 25,
+    "features": [
+      {
+        "description": "Chat exclusivo no servidor",
+        "details": "",
+        "has": true
+      },
+      {
+        "description": "Voar nos principais locais do servidor",
+        "details": "",
+        "has": true
+      },
+      {
+        "description": "Acesso a locais exclusivos",
+        "details": "",
+        "has": true
+      },
+      {
+        "description": "Permissão para criar lojas",
+        "details": "",
+        "has": true
+      },
+      {
+        "description": "Chance de dropar spawner",
+        "details": "",
+        "has": false
+      }
+    ]
+  },
+  {
+    "id": "15df1816-85d8-497b-b941-baf02502afed",
+    "name": "VIP NETHERITE",
+    "label": "Melhor VIP",
+    "iconClass": "text-red-600",
+    "price": 35,
+    "features": [
+      {
+        "description": "Chat exclusivo no servidor",
+        "details": "",
+        "has": true
+      },
+      {
+        "description": "Voar nos principais locais do servidor",
+        "details": "",
+        "has": true
+      },
+      {
+        "description": "Acesso a locais exclusivos",
+        "details": "",
+        "has": true
+      },
+      {
+        "description": "Permissão para criar lojas",
+        "details": "",
+        "has": true
+      },
+      {
+        "description": "Chance de dropar spawner",
+        "details": "",
+        "has": true
+      }
+    ]
+  }
+]

@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-2">
     <RouterLink
-      to="/store"
+      to="/loja"
       class="banner flex flex-col text-gray-50 items-center justify-center space-y-4 border-4 border-gray-50 bg-gray-50 rounded-xl shadow-xl h-56 sm:h-80"
     >
       <h2 class="font-semibold text-4xl bg-black p-2 bg-opacity-50 rounded">SEJA VIP!</h2>
@@ -9,16 +9,13 @@
     </RouterLink>
 
     <div class="bg-gray-50 rounded-xl shadow-xl">
-      <div class="flex items-center space-x-4 p-8 border-dashed border-b-2 shadow-lg">
-        <i class="ph-bold ph-hand-pointing text-6xl text-cyan-400 rotate-90"></i>
-        <div class="text-gray-600">
-          <h1 class="text-4xl font-bold">Não sabe como jogar?</h1>
-          <h2>
-            Assista o vídeo ao abaixo para aprender como jogar. Além do vídeo, você pode contar com nossos staffs para
-            lhe ajudar sempre que necessario!
-          </h2>
-        </div>
-      </div>
+      <SectionHeader
+        title="Não sabe como jogar?"
+        description="Assista o vídeo ao abaixo para aprender como jogar. Além do vídeo, você pode contar com nossos staffs para lhe ajudar sempre que necessario!"
+        icon="ph-bold ph-hand-pointing"
+        icon-color="cyan-400"
+        :icon-rotate-angle="90"
+      />
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-6 p-2">
         <div class="hidden flex-col items-center justify-center md:flex">
           <a
