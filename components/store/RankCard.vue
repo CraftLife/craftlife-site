@@ -19,7 +19,12 @@
             />
           </div>
         </div>
-        <p class="text-4xl whitespace-nowrap flex align-start"><span class="text-sm mt-1 mr-1">R$</span> {{ price }}</p>
+        <div>
+          <p v-if="discount" class="text-md text-right line-through">R$ {{ price }}</p>
+          <p class="text-4xl whitespace-nowrap flex align-start">
+            <span class="text-sm mt-1 mr-1">R$</span> {{ price - price * discount }}
+          </p>
+        </div>
       </div>
       <div class="border-dashed border-b-2" />
       <ul class="text-sm">
@@ -53,6 +58,10 @@ const props = defineProps({
     required: true
   },
   price: {
+    type: Number,
+    default: 0
+  },
+  discount: {
     type: Number,
     default: 0
   },

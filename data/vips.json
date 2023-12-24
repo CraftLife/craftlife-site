@@ -4,6 +4,7 @@
     "name": "VIP OURO",
     "iconClass": "text-amber-200",
     "price": 15,
+    "discount": 0.3,
     "features": [
       {
         "description": "Chat exclusivo no servidor",
@@ -38,6 +39,7 @@
     "label": "Mais vendido",
     "iconClass": "text-cyan-400",
     "price": 25,
+    "discount": 0.3,
     "features": [
       {
         "description": "Chat exclusivo no servidor",
@@ -72,6 +74,7 @@
     "label": "Melhor VIP",
     "iconClass": "text-red-600",
     "price": 35,
+    "discount": 0.3,
     "features": [
       {
         "description": "Chat exclusivo no servidor",

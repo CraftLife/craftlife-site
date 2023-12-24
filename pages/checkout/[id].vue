@@ -24,7 +24,12 @@
           </button>
         </form>
       </div>
-      <CheckoutDetailsCard class="sm:col-span-6 justify-self-end" :price="vip?.price" :name="vip?.name" />
+      <CheckoutDetailsCard
+        class="sm:col-span-6 justify-self-end"
+        :price="vip?.price"
+        :discount="vip?.discount"
+        :name="vip?.name"
+      />
     </div>
   </div>
 </template>
