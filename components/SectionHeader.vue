@@ -1,6 +1,13 @@
 <template>
   <div class="flex items-center space-x-4 p-8 border-dashed border-b-2 shadow-lg">
-    <i v-if="icon" class="text-6xl text-cyan-400" :class="[icon, 'text-' + iconColor, 'rotate-' + iconRotateAngle]" />
+    <i
+      v-if="icon"
+      class="text-6xl"
+      :class="[icon, 'rotate-' + iconRotateAngle]"
+      :style="{
+        color: iconColor
+      }"
+    />
     <div class="text-gray-600">
       <h1 class="text-4xl font-bold" v-text="title" />
       <h2 v-text="description" />
@@ -27,7 +34,7 @@ defineProps({
   },
   iconColor: {
     type: String,
-    default: 'gray-600'
+    default: '#22d3ee'
   },
   iconRotateAngle: {
     type: Number,

@@ -13,7 +13,6 @@
         title="Não sabe como jogar?"
         description="Assista o vídeo ao abaixo para aprender como jogar. Além do vídeo, você pode contar com nossos staffs para lhe ajudar sempre que necessario!"
         icon="ph-bold ph-hand-pointing"
-        icon-color="cyan-400"
         :icon-rotate-angle="90"
       />
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-6 p-2">

@@ -25,18 +25,19 @@
         </form>
       </div>
       <CheckoutDetailsCard
+        v-if="!pendingProduct"
         class="sm:col-span-6 justify-self-end"
-        :price="vip?.price"
-        :discount="vip?.discount"
-        :name="vip?.name"
+        :price="product.price"
+        :discount="product.discount"
+        :name="product.name"
       />
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-import vips from '@/data/vips.json'
+const route = useRoute()
 
-const vip = ref()
+const { pending: pendingProduct, data: product } = useApiFetch(`/product/${route.params.id}`)
 let mp: any
 
 const form = reactive({
@@ -47,13 +48,11 @@ const form = reactive({
   email: ''
 })
 
-const route = useRoute()
 const { data } = useAuth()
 const config = useRuntimeConfig()
 onMounted(() => {
   // @ts-ignore
   mp = new MercadoPago(config.public.mercadopagoPublicKey)
-  vip.value = vips.filter((vip) => vip.id === route.params.id)[0]
   if (data.value) {
     form.ign = data.value.username
     form.email = data.value.email
@@ -65,7 +64,7 @@ async function pagar() {
     method: 'POST',
     body: {
       ...form,
-      product_id: vip.value.id
+      product_id: product.value.uuid
     }
   })
 

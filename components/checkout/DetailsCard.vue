@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col bg-gray-100 shadow-xl rounded-2xl px-6 py-4 border border-gray-200 m-4 sm:max-w-sm">
     <p class="text-gray-600">Você vai pagar pelo <span class="text-gray-900 font-bold" v-text="name" /></p>
-    <p class="text-xl line-through" v-text="'R$ ' + price" />
+    <p v-if="discount" class="text-xl line-through" v-text="'R$ ' + price" />
     <p class="text-4xl" v-text="'R$ ' + (price - price * discount)" />
 
     <ul class="mt-4">
@@ -21,8 +21,8 @@
           <h2>Ativação rápida</h2>
         </div>
         <p class="text-gray-600 text-md">
-          Escolhendo a forma de pagamento cartão ou pix, seu vip será ativado em até 15 minutos, após o mercado pago nos
-          enviar a confirmação do pagamento.
+          Escolhendo a forma de pagamento cartão ou pix, seu {{ name }} será ativado em até 15 minutos, após o mercado
+          pago nos enviar a confirmação do pagamento.
         </p>
       </li>
     </ul>
@@ -40,7 +40,8 @@ defineProps({
     type: String
   },
   price: {
-    type: Number
+    type: Number,
+    default: 0
   },
   discount: {
     type: Number,

@@ -1,27 +1,35 @@
 <template>
-  <div class="bg-gray-50 rounded-xl shadow-xl">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pb-4">
+    <SkeletonCategoryCard v-if="categoriesPending" />
+    <StoreCategoryCard
+      v-for="category in categories"
+      :name="category.name"
+      :icon="category.icon"
+      @click="selectedCategory = category"
+    />
+  </div>
+  <div v-if="selectedCategory" class="bg-gray-50 rounded-xl shadow-xl">
     <SectionHeader
-      title="SEJA VIP!"
-      description="Confira todas as vantagens de ativar cada VIP em nossos servidores."
-      icon="ph ph-sketch-logo"
-      icon-color="cyan-400"
-      :discount="30"
+      :title="selectedCategory.title"
+      :description="selectedCategory.description"
+      :icon="selectedCategory.icon"
+      :icon-color="selectedCategory.iconColor"
     />
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-4">
-      <StoreRankCard
-        v-for="vip in vips"
-        :id="vip.id"
-        :title="vip.name"
-        :label="vip.label"
-        :icon-class="vip.iconClass"
-        :price="vip.price"
-        :features="vip.features"
-        :discount="vip.discount"
-        @select="$router.push(`/checkout/${vip.id}`)"
+      <StoreProductCard
+        v-for="product in selectedCategory.products"
+        :product="product"
+        @select="$router.push(`/checkout/${product.uuid}`)"
       />
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-import vips from '@/data/vips.json'
+const selectedCategory = ref()
+
+const { pending: categoriesPending, data: categories }: any = useApiFetch('/category', {
+  onResponse({ response }) {
+    selectedCategory.value = response._data[0]
+  }
+})
 </script>
