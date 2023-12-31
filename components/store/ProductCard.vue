@@ -39,8 +39,16 @@
         <li v-for="feature in product.features" class="flex items-center space-x-2">
           <i v-if="feature.has" class="ph-fill ph-check-circle text-xl text-emerald-400"></i>
           <i v-else class="ph ph-x-circle text-xl text-gray-500"></i>
-          <p v-text="feature.name" :class="{ ['text-gray-500 line-through']: !feature.has }" />
+          <p v-text="feature.name" class="flex-grow" :class="{ ['text-gray-500 line-through']: !feature.has }" />
+          <i
+            v-if="feature.description"
+            class="ph-fill ph-warning-circle text-xl text-gray-400 cursor-pointer"
+            @click="toggleOverlayFeature($event, feature.id)"
+          ></i>
         </li>
+        <OverlayPanel ref="featureOverlay">
+          <div v-html="featureSelected.description"></div>
+        </OverlayPanel>
       </ul>
     </div>
     <div class="space-y-4 mt-4">
@@ -55,11 +63,21 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { ref } from 'vue'
 const props = defineProps({
   product: {
     type: Object,
     required: true
   }
 })
+
+const featureSelected = ref()
+
+const featureOverlay = ref()
+
+function toggleOverlayFeature(event: any, featureId: String) {
+  featureSelected.value = props.product.features.filter((feature: any) => feature.id == featureId)[0]
+  featureOverlay.value.toggle(event)
+}
 </script>
 <style></style>
