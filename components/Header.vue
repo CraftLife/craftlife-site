@@ -38,7 +38,7 @@ const { pending, data: serverStatus }: any = useApiFetch('/server/status')
 
 <style scoped>
 .banner {
-  background-image: url('/assets/images/banner-natal.jpeg');
+  background-image: url('/assets/images/banner.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
