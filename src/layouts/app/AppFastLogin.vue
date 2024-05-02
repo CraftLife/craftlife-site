@@ -19,7 +19,7 @@
         "
       >
         <img
-          class="w-5rem mx-auto border-round -mt-7 shadow-1"
+          class="w-5rem h-5rem mx-auto border-round -mt-6 shadow-1"
           :src="`https://mineskin.eu/helm/${fastLoginData.response?.username}/64.svg`"
           alt=""
         />
