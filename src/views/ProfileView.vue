@@ -9,7 +9,7 @@ import * as skinview3d from 'skinview3d'
 
 onMounted(() => {
   let viewer = new skinview3d.SkinViewer({
-    canvas: document.getElementById('canvas'),
+    canvas: document.getElementById('canvas') as HTMLCanvasElement,
     width: 300,
     height: 400,
     skin: 'https://mineskin.eu/skin/Brun0XP'
