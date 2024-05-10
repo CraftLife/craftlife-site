@@ -5,8 +5,11 @@
         to="/store"
         class="banner flex flex-column text-gray-50 align-items-center justify-content-center gap-4 h-14rem no-underline border-3 border-round-xl"
       >
-        <h2 class="m-0 text-4xl bg-black-alpha-60 border-round-md p-2">SEJA VIP!</h2>
-        <p class="m-0 text-xl bg-black-alpha-60 border-round-md p-2">E receba diversas vantagens</p>
+        <h2 class="m-0 text-4xl bg-black-alpha-60 border-round-md p-2">DOE PARA NOSSOS COLEGAS DO RS!</h2>
+        <p class="m-0 text-xl bg-black-alpha-60 border-round-md p-2 max-w-30rem">
+          Cada produto comprado em nossa loja até 30/05, 100% do dinheiro arrecadado será doado para ajudar as familías
+          do rio grande do sul!
+        </p>
       </RouterLink>
     </template>
   </Card>
@@ -56,7 +59,7 @@
 
 <style lang="scss" scoped>
 .banner {
-  background: url('@/assets/imgs/car-banner.jpeg');
+  background: url('@/assets/imgs/campanha-rs.jpeg');
   background-position: center;
 }
 </style>
