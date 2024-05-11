@@ -14,15 +14,17 @@
     </template>
   </Card>
 
-  <div class="grid mt-2">
+  <div class="grid mt-2" v-if="isFinished">
     <div class="col-6">
       <Card class="h-full">
         <template #title>Meta de doação</template>
         <template #content>
-          <ProgressBar class="mt-4" :value="(120 / 300) * 100">{{ (120 / 300) * 100 }}%</ProgressBar>
+          <ProgressBar :value="goalPercent"> {{ goalPercent }}% </ProgressBar>
           <div class="mt-4">
-            Foram doados <span class="text-green-500">R$ 120,00</span> até o momento, a meta é
-            <span class="text-green-500">R$ 300,00</span>
+            Até agora, arrecadamos <span class="text-green-500">{{ formatCurrency(goalData.collected) }}</span> para
+            ajudar as famílias. Nossa meta é alcançar
+            <span class="text-green-500">{{ formatCurrency(goalData.goal) }}</span
+            >. Ao atingir a meta todos que ajudaram irão receber um presente especial no servidor.
           </div>
         </template>
       </Card>
@@ -32,13 +34,17 @@
         <template #title>Últimas doações</template>
         <template #content>
           <div class="flex flex-column gap-2">
-            <div class="flex align-items-center">
-              <img class="w-3rem h-3rem border-round" src="https://mineskin.eu/helm/Brun0XP/64.svg" alt="" />
+            <div v-for="donation in goalData.lastDonations" class="flex align-items-center">
+              <img
+                class="w-3rem h-3rem border-round"
+                :src="`https://mineskin.eu/helm/${donation.username}/64.svg`"
+                alt=""
+              />
               <div class="ml-3">
-                <p class="m-0">Brun0XP</p>
-                <p class="m-0">VIP NETHERITE</p>
+                <p class="m-0 font-bold">{{ donation.username }}</p>
+                <p class="m-0 text-sm">{{ donation.productName }}</p>
               </div>
-              <div class="ml-auto text-xl text-green-500">R$ 35,00</div>
+              <div class="ml-auto text-xl text-green-500">{{ formatCurrency(donation.transactionAmount) }}</div>
             </div>
           </div>
         </template>
@@ -87,6 +93,26 @@
     </template>
   </Card>
 </template>
+
+<script lang="ts" setup>
+import { computed } from 'vue'
+import { useFetch } from '@/composables'
+
+const { isFinished, data: goalData }: any = useFetch('/server/goal/rs').json()
+
+const goalPercent = computed(() => {
+  if (goalData) return (goalData.value.collected / goalData.value.goal) * 100
+})
+
+const formatCurrency = (value) => {
+  const options = {
+    style: 'currency',
+    currency: 'BRL'
+  }
+
+  return value.toLocaleString('pt-BR', options)
+}
+</script>
 
 <style lang="scss" scoped>
 .banner {
