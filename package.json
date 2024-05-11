@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --mode dev",
+    "hmlg": "vite --mode hmlg",
     "build": "vue-tsc && vite build",
     "preview": "vite preview"
   },
