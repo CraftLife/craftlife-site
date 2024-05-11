@@ -19,7 +19,7 @@
       <Card class="h-full">
         <template #title>Meta de doação</template>
         <template #content>
-          <ProgressBar :value="goalPercent"> {{ goalPercent }}% </ProgressBar>
+          <ProgressBar :value="goalPercent > 100 ? 100 : goalPercent"> {{ goalPercent }}% </ProgressBar>
           <div class="mt-4">
             Até agora, arrecadamos <span class="text-green-500">{{ formatCurrency(goalData.collected) }}</span> para
             ajudar as famílias. Nossa meta é alcançar
@@ -101,7 +101,8 @@ import { useFetch } from '@/composables'
 const { isFinished, data: goalData }: any = useFetch('/server/goal/rs').json()
 
 const goalPercent = computed(() => {
-  if (goalData) return (goalData.value.collected / goalData.value.goal) * 100
+  if (goalData) return +((goalData.value.collected / goalData.value.goal) * 100).toFixed()
+  return 0
 })
 
 const formatCurrency = (value: number) => {
