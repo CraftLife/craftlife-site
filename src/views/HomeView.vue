@@ -104,7 +104,7 @@ const goalPercent = computed(() => {
   if (goalData) return (goalData.value.collected / goalData.value.goal) * 100
 })
 
-const formatCurrency = (value) => {
+const formatCurrency = (value: number) => {
   const options = {
     style: 'currency',
     currency: 'BRL'
