@@ -7,13 +7,50 @@
       >
         <h2 class="m-0 text-4xl bg-black-alpha-60 border-round-md p-2">DOE PARA NOSSOS COLEGAS DO RS!</h2>
         <p class="m-0 text-xl bg-black-alpha-60 border-round-md p-2 max-w-30rem">
-          Cada produto comprado em nossa loja até 30/05, 100% do dinheiro arrecadado será doado para ajudar as familías
+          Cada produto comprado em nossa loja até 30/05, 100% do dinheiro arrecadado será doado para ajudar as famílias
           do rio grande do sul!
         </p>
       </RouterLink>
     </template>
   </Card>
 
+  <div class="grid mt-2" v-if="isFinished">
+    <div class="col-6">
+      <Card class="h-full">
+        <template #title>Meta de doação</template>
+        <template #content>
+          <ProgressBar :value="goalPercent"> {{ goalPercent }}% </ProgressBar>
+          <div class="mt-4">
+            Até agora, arrecadamos <span class="text-green-500">{{ formatCurrency(goalData.collected) }}</span> para
+            ajudar as famílias. Nossa meta é alcançar
+            <span class="text-green-500">{{ formatCurrency(goalData.goal) }}</span
+            >. Ao atingir a meta todos que ajudaram irão receber um presente especial no servidor.
+          </div>
+        </template>
+      </Card>
+    </div>
+    <div class="col-6">
+      <Card class="h-full">
+        <template #title>Últimas doações</template>
+        <template #content>
+          <div class="flex flex-column gap-2">
+            <div v-for="donation in goalData.lastDonations" class="flex align-items-center">
+              <img
+                class="w-3rem h-3rem border-round"
+                :src="`https://mineskin.eu/helm/${donation.username}/64.svg`"
+                alt=""
+              />
+              <div class="ml-3">
+                <p class="m-0 font-bold">{{ donation.username }}</p>
+                <p class="m-0 text-sm">{{ donation.productName }}</p>
+              </div>
+              <div class="ml-auto text-xl text-green-500">{{ formatCurrency(donation.transactionAmount) }}</div>
+            </div>
+          </div>
+        </template>
+      </Card>
+    </div>
+  </div>
   <Card class="mt-2">
     <template #header>
       <div class="flex align-items-center gap-3 border-dashed border-none border-bottom-2 surface-border p-4">
@@ -57,9 +94,31 @@
   </Card>
 </template>
 
+<script lang="ts" setup>
+import { computed } from 'vue'
+import { useFetch } from '@/composables'
+
+const { isFinished, data: goalData }: any = useFetch('/server/goal/rs').json()
+
+const goalPercent = computed(() => {
+  if (goalData) return (goalData.value.collected / goalData.value.goal) * 100
+})
+
+const formatCurrency = (value) => {
+  const options = {
+    style: 'currency',
+    currency: 'BRL'
+  }
+
+  return value.toLocaleString('pt-BR', options)
+}
+</script>
+
 <style lang="scss" scoped>
 .banner {
   background: url('@/assets/imgs/campanha-rs.jpeg');
   background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 </style>
