@@ -50,6 +50,11 @@ const routes: RouteRecordRaw[] = [
         path: '/profile/:username',
         name: 'Profile',
         component: () => import('@/views/ProfileView.vue')
+      },
+      {
+        path: '/validate-payment',
+        name: 'ValidatePayment',
+        component: () => import('@/views/portal/ValidatePaymentView.vue')
       }
     ]
   },
