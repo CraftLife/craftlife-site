@@ -20,12 +20,13 @@
         <template #title>Meta de doação</template>
         <template #content>
           <ProgressBar :value="goalPercent > 100 ? 100 : goalPercent"> {{ goalPercent }}% </ProgressBar>
-          <div class="mt-4">
+          <div class="mt-4" v-if="goalData.collected < goalData.goal">
             Até agora, arrecadamos <span class="text-green-500">{{ formatCurrency(goalData.collected) }}</span> para
             ajudar as famílias. Nossa meta é alcançar
             <span class="text-green-500">{{ formatCurrency(goalData.goal) }}</span
             >. Ao atingir a meta todos que ajudaram irão receber um presente especial no servidor.
           </div>
+          <div class="mt-4" v-else>Meta atinginda! obrigado a todos os jogadores que ajudaram o rio grande do sul!</div>
         </template>
       </Card>
     </div>
