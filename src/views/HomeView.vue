@@ -26,7 +26,11 @@
             <span class="text-green-500">{{ formatCurrency(goalData.goal) }}</span
             >. Ao atingir a meta todos que ajudaram irão receber um presente especial no servidor.
           </div>
-          <div class="mt-4" v-else>Meta atinginda! obrigado a todos os jogadores que ajudaram o rio grande do sul!</div>
+          <div class="mt-4" v-else>
+            Meta atingida! Conseguimos alcançar um objetivo que nunca imaginariamos! Nós da equipe Craftlife gostariamos
+            de agradecer a todos que ajudaram o Rio Grande do Sul! A generosidade de cada um de vocês vai fazer uma
+            enorme diferença na vida das famílias. Obrigado pelo apoio!
+          </div>
         </template>
       </Card>
     </div>
