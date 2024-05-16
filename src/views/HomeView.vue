@@ -5,11 +5,8 @@
         to="/store"
         class="banner flex flex-column text-gray-50 align-items-center justify-content-center gap-4 h-14rem no-underline border-3 border-round-xl"
       >
-        <h2 class="m-0 text-4xl bg-black-alpha-60 border-round-md p-2">DOE PARA NOSSOS COLEGAS DO RS!</h2>
-        <p class="m-0 text-xl bg-black-alpha-60 border-round-md p-2 max-w-30rem">
-          Cada produto comprado em nossa loja até 30/05, 100% do dinheiro arrecadado será doado para ajudar as famílias
-          do rio grande do sul!
-        </p>
+        <h2 class="m-0 text-4xl bg-black-alpha-60 border-round-md p-2">SEJA VIP!</h2>
+        <p class="m-0 text-xl bg-black-alpha-60 border-round-md p-2">E receba diversas vantagens</p>
       </RouterLink>
     </template>
   </Card>
@@ -17,7 +14,7 @@
   <div class="grid mt-2" v-if="isFinished">
     <div class="col-6">
       <Card class="h-full">
-        <template #title>Meta de doação</template>
+        <template #title>Meta de compras</template>
         <template #content>
           <ProgressBar :value="goalPercent > 100 ? 100 : goalPercent"> {{ goalPercent }}% </ProgressBar>
           <div class="mt-4" v-if="goalData.collected < goalData.goal">
@@ -36,7 +33,7 @@
     </div>
     <div class="col-6">
       <Card class="h-full">
-        <template #title>Últimas doações</template>
+        <template #title>Últimas compras</template>
         <template #content>
           <div class="flex flex-column gap-2">
             <div v-for="donation in goalData.lastDonations" class="flex align-items-center">
@@ -122,7 +119,7 @@ const formatCurrency = (value: number) => {
 
 <style lang="scss" scoped>
 .banner {
-  background: url('@/assets/imgs/campanha-rs.jpeg');
+  background: url('@/assets/imgs/car-banner.jpeg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
