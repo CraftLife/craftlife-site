@@ -11,48 +11,6 @@
     </template>
   </Card>
 
-  <div class="grid mt-2" v-if="isFinished">
-    <div class="col-6">
-      <Card class="h-full">
-        <template #title>Meta de compras</template>
-        <template #content>
-          <ProgressBar :value="goalPercent > 100 ? 100 : goalPercent"> {{ goalPercent }}% </ProgressBar>
-          <div class="mt-4" v-if="goalData.collected < goalData.goal">
-            Até agora, arrecadamos <span class="text-green-500">{{ formatCurrency(goalData.collected) }}</span> para
-            ajudar as famílias. Nossa meta é alcançar
-            <span class="text-green-500">{{ formatCurrency(goalData.goal) }}</span
-            >. Ao atingir a meta todos que ajudaram irão receber um presente especial no servidor.
-          </div>
-          <div class="mt-4" v-else>
-            Meta atingida! Conseguimos alcançar um objetivo que nunca imaginariamos! Nós da equipe Craftlife gostariamos
-            de agradecer a todos que ajudaram o Rio Grande do Sul! A generosidade de cada um de vocês vai fazer uma
-            enorme diferença na vida das famílias. Obrigado pelo apoio!
-          </div>
-        </template>
-      </Card>
-    </div>
-    <div class="col-6">
-      <Card class="h-full">
-        <template #title>Últimas compras</template>
-        <template #content>
-          <div class="flex flex-column gap-2">
-            <div v-for="donation in goalData.lastDonations" class="flex align-items-center">
-              <img
-                class="w-3rem h-3rem border-round"
-                :src="`https://mineskin.eu/helm/${donation.username}/64.svg`"
-                alt=""
-              />
-              <div class="ml-3">
-                <p class="m-0 font-bold">{{ donation.username }}</p>
-                <p class="m-0 text-sm">{{ donation.productName }}</p>
-              </div>
-              <div class="ml-auto text-xl text-green-500">{{ formatCurrency(donation.transactionAmount) }}</div>
-            </div>
-          </div>
-        </template>
-      </Card>
-    </div>
-  </div>
   <Card class="mt-2">
     <template #header>
       <div class="flex align-items-center gap-3 border-dashed border-none border-bottom-2 surface-border p-4">
@@ -95,27 +53,6 @@
     </template>
   </Card>
 </template>
-
-<script lang="ts" setup>
-import { computed } from 'vue'
-import { useFetch } from '@/composables'
-
-const { isFinished, data: goalData }: any = useFetch('/server/goal/rs').json()
-
-const goalPercent = computed(() => {
-  if (goalData) return +((goalData.value.collected / goalData.value.goal) * 100).toFixed()
-  return 0
-})
-
-const formatCurrency = (value: number) => {
-  const options = {
-    style: 'currency',
-    currency: 'BRL'
-  }
-
-  return value.toLocaleString('pt-BR', options)
-}
-</script>
 
 <style lang="scss" scoped>
 .banner {
