@@ -1,10 +1,10 @@
 <template>
-  <nav class="p-3">
-    <Menubar pt:root:class="navigation-bar" :model="computedLinks">
+  <nav>
+    <Menubar pt:root:class="max-w-6xl mx-auto" :model="computedLinks">
       <template #item="{ item, props }">
-        <RouterLink :to="item.to" v-ripple class="flex align-items-center" v-bind="props.action">
+        <RouterLink :to="item.to" v-ripple class="flex items-center" v-bind="props.action">
           <span :class="item.icon" />
-          <span class="ml-2">{{ item.label }}</span>
+          <span class="ml-1">{{ item.label }}</span>
         </RouterLink>
       </template>
       <template #end>
@@ -83,10 +83,3 @@ const profileActions = ref([
   }
 ])
 </script>
-
-<style lang="scss" scoped>
-.navigation-bar {
-  max-width: 1120px;
-  margin: 0 auto;
-}
-</style>

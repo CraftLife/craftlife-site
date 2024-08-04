@@ -1,9 +1,9 @@
 <template>
-  <div class="flex flex-column min-h-screen">
+  <div class="flex flex-col gap-3 min-h-screen">
     <AppLayoutHeader />
-    <AppLayoutNavigation />
-    <div class="px-3 pb-3 flex-grow-1">
-      <div class="content">
+    <AppLayoutNavigation class="px-3" />
+    <div class="flex-grow px-3">
+      <div class="max-w-6xl mx-auto">
         <RouterView />
       </div>
     </div>
@@ -18,10 +18,3 @@ import AppLayoutNavigation from '@/layouts/app/AppLayoutNavigation.vue'
 import AppLayoutFooter from '@/layouts/app/AppLayoutFooter.vue'
 import AppFastLogin from '@/layouts/app/AppFastLogin.vue'
 </script>
-
-<style lang="scss" scoped>
-.content {
-  max-width: 1120px;
-  margin: 0 auto;
-}
-</style>

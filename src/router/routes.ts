@@ -13,12 +13,12 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/',
         name: 'Home',
-        component: () => import('@/views/HomeView.vue')
+        component: () => import('@/views/app/HomeView.vue')
       },
       {
         path: '/store',
         name: 'Store',
-        component: () => import('@/views/StoreView.vue')
+        component: () => import('@/views/app/StoreView.vue')
       },
       {
         path: '/rules',
@@ -39,17 +39,17 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/contact',
         name: 'Contact',
-        component: () => import('@/views/ContactView.vue')
+        component: () => import('@/views/app/ContactView.vue')
       },
       {
         path: '/checkout/:productId',
         name: 'Checkout',
-        component: () => import('@/views/CheckoutView.vue')
+        component: () => import('@/views/app/CheckoutView.vue')
       },
       {
         path: '/profile/:username',
         name: 'Profile',
-        component: () => import('@/views/ProfileView.vue')
+        component: () => import('@/views/app/ProfileView.vue')
       },
       {
         path: '/validate-payment',

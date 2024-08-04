@@ -5,7 +5,7 @@
 }
 body {
   margin: 0;
-  background-color: #fad3e7;
+  background-color: var(--p-primary-100);
 }
 
 .loading-layout {
