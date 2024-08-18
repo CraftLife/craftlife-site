@@ -8,6 +8,7 @@ import ToastService from 'primevue/toastservice'
 import Ripple from 'primevue/ripple'
 
 import TrickyTrails from '@/themes/TrickyTrails'
+import ptPrimevueLocale from '@/locales/primevue.json'
 
 import '@/assets/styles.scss'
 
@@ -26,7 +27,8 @@ app.use(PrimeVue, {
       }
     }
   },
-  ripple: true
+  ripple: true,
+  locale: ptPrimevueLocale
 })
 app.use(ToastService)
 

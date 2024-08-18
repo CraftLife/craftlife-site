@@ -12,14 +12,14 @@
   >
     <template #container="{ closeCallback }">
       <div
-        class="flex flex-column p-3 gap-2"
+        class="flex flex-col p-3 gap-2"
         style="
           border-radius: 12px;
-          background-image: radial-gradient(circle at left top, var(--primary-400), var(--primary-700));
+          background-image: radial-gradient(circle at left top, var(--p-primary-400), var(--p-primary-700));
         "
       >
         <img
-          class="w-5rem h-5rem mx-auto border-round -mt-6 shadow-1"
+          class="w-[5rem] h-[5rem] mx-auto rounded -mt-12 shadow-md"
           :src="`https://mineskin.eu/helm/${fastLoginData.response?.username}/64.svg`"
           alt=""
         />
@@ -34,14 +34,14 @@
             icon="pi pi-times"
             @click="closeCallback"
             text
-            class="w-full text-primary-50 border-white-alpha-30 hover:bg-white-alpha-10"
+            class="w-full text-primary-50 border-white-alpha-30 hover:bg-white-alpha-10 hover:text-primary-500"
           ></Button>
           <Button
             label="Continuar"
             icon="pi pi-sign-in"
             @click="saveFastLoginToken"
             text
-            class="w-full text-primary-50 border-white-alpha-30 hover:bg-white-alpha-10"
+            class="w-full text-primary-50 border-white-alpha-30 hover:bg-white-alpha-10 hover:text-primary-500"
           ></Button>
         </div>
       </div>

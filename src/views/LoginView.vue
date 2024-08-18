@@ -8,10 +8,6 @@
         <div class="flex justify-center -mt-10">
           <img class="w-[5rem] border-round-lg" :src="form.headUrl" />
         </div>
-        <!-- <img
-          class="w-16 h-16 self-center -mt-12 rounded-md shadow-sm"
-          :src="`https://mineskin.eu/helm/${form.username}/64.svg`"
-        /> -->
       </template>
       <template #title>
         <h1 class="text-2xl font-semibold">Seja bem-vindo de volta!</h1>

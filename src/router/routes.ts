@@ -66,6 +66,16 @@ const routes: RouteRecordRaw[] = [
         path: '/portal',
         name: 'PortalDashboard',
         component: () => import('@/views/portal/DashboardView.vue')
+      },
+      {
+        path: '/portal/user',
+        name: 'PortalUser',
+        component: () => import('@/views/portal/UserView.vue')
+      },
+      {
+        path: '/portal/punishments',
+        name: 'PortalPunishment',
+        component: () => import('@/views/portal/PunishmentView.vue')
       }
     ]
   }

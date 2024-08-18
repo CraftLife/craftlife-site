@@ -61,7 +61,7 @@ const links = ref([
   {
     label: 'PORTAL ',
     icon: 'pi pi-gauge',
-    roles: ['ADMIN', 'STAFF'],
+    roles: ['DIRECTOR', 'ADMIN'],
     to: '/portal'
   }
 ])
