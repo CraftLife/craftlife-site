@@ -1,11 +1,11 @@
 <template>
-  <div class="flex gap-2">
+  <div class="flex gap-2 overflow-x-auto">
     <!-- <pre>{{ categories }}</pre> -->
     <Card class="w-full cursor-pointer" @click="selectedCategorie = categorie" v-for="categorie in categories">
       <template #content>
         <div class="flex items-center gap-2">
           <i class="text-xl" :class="categorie.icon"></i>
-          <span>{{ categorie.name }}</span>
+          <span class="text-nowrap">{{ categorie.name }}</span>
         </div>
       </template>
     </Card>

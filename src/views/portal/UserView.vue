@@ -190,12 +190,12 @@ const onSort = (event: any) => {
   pageable.value.sort = `${event.sortField},${event.sortOrder === 1 ? 'asc' : 'desc'}`
   getUsers()
 }
-const onFilter = (event: any) => {
-  for (const [key, filter] of Object.entries(event.filters)) {
-    const value = filter.value
-    const matchMode = filter.matchMode
-    pageable.value.filters[`${key}.${matchMode}`] = value
-  }
+const onFilter = (_event: any) => {
+  // for (const [key, filter] of Object.entries(event.filters)) {
+  // const value = filter.value
+  // const matchMode = filter.matchMode
+  // pageable.value.filters[`${key}.${matchMode}`] = value
+  // }
 
   getUsers()
 }
