@@ -1,6 +1,5 @@
 <template>
   <div class="flex gap-2 overflow-x-auto">
-    <!-- <pre>{{ categories }}</pre> -->
     <Card class="w-full cursor-pointer" @click="selectedCategorie = categorie" v-for="categorie in categories">
       <template #content>
         <div class="flex items-center gap-2">
@@ -28,44 +27,53 @@
         <Card pt:body:class="p-3" v-for="product in selectedCategorie.products">
           <template #content>
             <div class="flex flex-col gap-3">
-              <div class="flex items-center gap-2">
-                <i class="text-5xl" :class="product.icon" :style="{ color: product.iconColor }"></i>
-                <span class="text-lg">{{ product.name }}</span>
-                <div class="flex items-start ml-auto text-3xl">
-                  <span class="text-sm mr-1 mt-1">R$</span>
-                  {{ product.price - product.price * product.discount }}
-                </div>
+              <img
+                class="rounded-xl max-w-[15rem] mx-auto shadow-inner"
+                :src="product.image"
+                style="border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; background-color: var(--p-primary-100)"
+              />
+              <div class="text-center">
+                <h2 class="text-2xl font-bold text-primary-500">{{ product.name }}</h2>
+                <p class="text-md">{{ product.description }}</p>
               </div>
-              <div class="border-dashed border-b surface-border"></div>
-              <ul class="flex flex-col gap-2 list-none pl-0">
-                <li
-                  v-for="feature in product.features"
-                  class="flex items-center gap-1 text-sm"
-                  :class="{ 'line-through': !feature.has }"
-                >
-                  <i v-if="feature.has" class="pi pi-check-circle text-green-500"></i>
-                  <i v-else class="pi pi-times-circle"></i>
-                  {{ feature.name }}
-                </li>
-              </ul>
-              <div class="border-dashed border-b surface-border"></div>
-              <RouterLink :to="`/checkout/${product.uuid}`">
-                <Button class="w-full" label="Adquirir agora!"></Button>
-              </RouterLink>
+
+              <div class="flex justify-center">
+                <span class="text-sm mr-1 mt-1">R$</span>
+                <span class="text-3xl">{{ formatCurrency(product.price) }}</span>
+              </div>
+              <div class="flex gap-3 items-center">
+                <Button class="w-full" label="Adquirir agora!" outlined @click="selectProduct(product)"></Button>
+              </div>
             </div>
           </template>
         </Card>
       </div>
     </template>
   </Card>
+
+  <Dialog
+    v-model:visible="modalSummaryVisible"
+    modal
+    :header="selectedProduct?.name"
+    class="mx-3"
+    :style="{ width: '40rem' }"
+  >
+    <img :src="selectedProduct?.image" class="max-w-[10rem] mx-auto" />
+
+    <Button label="Adicionar ao carrinho" outlined></Button>
+  </Dialog>
 </template>
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
-import { useFetch } from '@/composables'
+import { useFetch, useFormatter } from '@/composables'
 
 const categories = ref()
 const selectedCategorie = ref()
+const selectedProduct = ref()
+const modalSummaryVisible = ref(false)
+
+const { formatCurrency } = useFormatter()
 
 onMounted(() => {
   getCategories()
@@ -79,5 +87,10 @@ const getCategories = () => {
       categories.value = data.value
       selectedCategorie.value = data.value[0]
     })
+}
+
+const selectProduct = (product: any) => {
+  selectedProduct.value = product
+  modalSummaryVisible.value = true
 }
 </script>

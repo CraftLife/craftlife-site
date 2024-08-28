@@ -21,6 +21,7 @@ app.use(PrimeVue, {
   theme: {
     preset: TrickyTrails,
     options: {
+      darkModeSelector: 'none',
       cssLayer: {
         name: 'primevue',
         order: 'tailwind-base, primevue, tailwind-utilities'
