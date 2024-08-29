@@ -73,7 +73,7 @@
         :pt:content:class="{ ['border-none']: !(user && user.roles.includes('DIRECTOR')) }"
       >
       </Editor>
-      <div class="flex justify-end">
+      <div v-if="user && user.roles.includes('DIRECTOR')" class="flex justify-end">
         <Button
           class="mt-2"
           severity="success"
