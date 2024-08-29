@@ -103,7 +103,6 @@ const categories = ref()
 const selectedCategorie = ref()
 const selectedProduct = ref()
 const modalSummaryVisible = ref(false)
-const data = ref('<p>Teste</p>')
 
 const { formatCurrency } = useFormatter()
 const { user } = useAuth()
