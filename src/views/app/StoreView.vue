@@ -53,27 +53,60 @@
 
   <Dialog
     v-model:visible="modalSummaryVisible"
-    modal
     :header="selectedProduct?.name"
+    modal
     class="mx-3"
     :style="{ width: '40rem' }"
   >
-    <img :src="selectedProduct?.image" class="max-w-[10rem] mx-auto" />
+    <img
+      :src="selectedProduct?.image"
+      class="max-w-[10rem] mx-auto shadow-inner"
+      style="border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; background-color: var(--p-surface-100)"
+    />
+    <h2 class="text-2xl font-bold text-primary-500 text-center my-4">{{ selectedProduct.name }}</h2>
 
-    <Button label="Adicionar ao carrinho" outlined></Button>
+    <div class="border-y-2 border-dashed py-4">
+      <Editor
+        v-model="selectedProduct.summary"
+        :readonly="!(user && user.roles.includes('DIRECTOR'))"
+        :pt:toolbar:class="{ hidden: !(user && user.roles.includes('DIRECTOR')) }"
+        :pt:content:class="{ ['border-none']: !(user && user.roles.includes('DIRECTOR')) }"
+      >
+      </Editor>
+      <div class="flex justify-end">
+        <Button
+          class="mt-2"
+          severity="success"
+          label="Salvar"
+          icon="ph ph-floppy-disk"
+          size="small"
+          outlined
+          @click="updateSummary"
+        ></Button>
+      </div>
+    </div>
+
+    <template #footer>
+      <div class="flex justify-between items-center w-full">
+        <span class="text-2xl">R$ {{ formatCurrency(selectedProduct.price) }}</span>
+        <Button label="Adquirir agora!" outlined @click=""></Button>
+      </div>
+    </template>
   </Dialog>
 </template>
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
-import { useFetch, useFormatter } from '@/composables'
+import { useFetch, useFormatter, useAuth } from '@/composables'
 
 const categories = ref()
 const selectedCategorie = ref()
 const selectedProduct = ref()
 const modalSummaryVisible = ref(false)
+const data = ref('<p>Teste</p>')
 
 const { formatCurrency } = useFormatter()
+const { user } = useAuth()
 
 onMounted(() => {
   getCategories()
@@ -92,5 +125,14 @@ const getCategories = () => {
 const selectProduct = (product: any) => {
   selectedProduct.value = product
   modalSummaryVisible.value = true
+}
+
+const updateSummary = () => {
+  useFetch(`product/update-summary/${selectedProduct.value.id}`)
+    .post(selectedProduct.value.summary)
+    .json()
+    .then((response) => {
+      console.log(response.data)
+    })
 }
 </script>
