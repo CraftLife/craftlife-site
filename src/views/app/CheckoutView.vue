@@ -50,7 +50,7 @@
               <h1 class="mt-0 text-base font-normal">
                 Você vai pagar pelo <b>{{ product?.name }}</b>
               </h1>
-              <span class="text-5xl font-semibold">R$ {{ product?.price }}</span>
+              <span class="text-5xl font-semibold">R$ {{ formatCurrency(product?.price) }}</span>
 
               <ul class="list-none pl-0 flex flex-col gap-4 mt-3">
                 <li>
@@ -88,10 +88,11 @@
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
-import { useFetch, useAuth } from '@/composables'
+import { useFetch, useAuth, useFormatter } from '@/composables'
 import { useRoute } from 'vue-router'
 
 const { user } = useAuth()
+const { formatCurrency } = useFormatter()
 
 const product = ref()
 
@@ -122,7 +123,7 @@ const getProduct = () => {
 
 const onSubmit = () => {
   useFetch('checkout/order')
-    .post({ ...form.value, ign: user.value?.username, product_id: product.value?.uuid })
+    .post({ ...form.value, ign: user.value?.username, product_id: product.value?.id })
     .json()
     .then(({ data }) => {
       mp.checkout({

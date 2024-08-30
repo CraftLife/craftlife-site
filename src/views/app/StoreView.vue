@@ -89,7 +89,9 @@
     <template #footer>
       <div class="flex justify-between items-center w-full">
         <span class="text-2xl">R$ {{ formatCurrency(selectedProduct.price) }}</span>
-        <Button label="Adquirir agora!" outlined @click=""></Button>
+        <RouterLink :to="`/checkout/${selectedProduct.id}`">
+          <Button label="Adquirir agora!" outlined></Button>
+        </RouterLink>
       </div>
     </template>
   </Dialog>
