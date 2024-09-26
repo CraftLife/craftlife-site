@@ -67,12 +67,20 @@
 
     <div class="border-y-2 border-dashed py-4">
       <Editor
+        :api-key="tinyMCEKey"
+        v-if="user && user.roles.includes('DIRECTOR')"
+        :init="{
+          toolbar_mode: 'scrolling',
+          language_url: '/tinyMCE/pt_BR.js',
+          language: 'pt_BR',
+          plugins:
+            'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks',
+          toolbar:
+            'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat'
+        }"
         v-model="selectedProduct.summary"
-        :readonly="!(user && user.roles.includes('DIRECTOR'))"
-        :pt:toolbar:class="{ hidden: !(user && user.roles.includes('DIRECTOR')) }"
-        :pt:content:class="{ ['border-none']: !(user && user.roles.includes('DIRECTOR')) }"
-      >
-      </Editor>
+      />
+      <div v-else v-html="selectedProduct.summary"></div>
       <div v-if="user && user.roles.includes('DIRECTOR')" class="flex justify-end">
         <Button
           class="mt-2"
@@ -98,8 +106,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useFetch, useFormatter, useAuth } from '@/composables'
+import Editor from '@tinymce/tinymce-vue'
 
 const categories = ref()
 const selectedCategorie = ref()
@@ -136,4 +145,6 @@ const updateSummary = () => {
       console.log(response.data)
     })
 }
+
+const tinyMCEKey = computed(() => process.env.VITE_TINYMCE_KEY)
 </script>
