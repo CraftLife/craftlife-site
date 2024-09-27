@@ -1,0 +1,94 @@
+[
+  {
+    "name": "Dashboard",
+    "path": "/portal",
+    "icon": "pi pi-home",
+    "roles": ["ADMIN"],
+    "active": true
+  },
+  {
+    "name": "Jogadores",
+    "path": "/portal/user",
+    "icon": "pi pi-users",
+    "roles": ["ADMIN"],
+    "active": false
+  },
+  {
+    "name": "Loja",
+    "icon": "pi pi-shopping-cart",
+    "roles": ["ADMIN"],
+    "children": [
+      {
+        "name": "Ativação",
+        "path": "/portal/validate-payment",
+        "icon": "pi pi-check",
+        "roles": ["ADMIN"],
+        "active": true
+      }
+    ],
+    "active": true
+  },
+  {
+    "name": "Moderação",
+    "path": "/portal/moderation",
+    "icon": "pi pi-shield",
+    "roles": ["ADMIN"],
+    "active": false
+  },
+  {
+    "name": "Mundos",
+    "path": "/portal/worlds",
+    "icon": "pi pi-globe",
+    "roles": ["ADMIN"],
+    "active": false
+  },
+  {
+    "name": "Plugins",
+    "path": "/portal/plugins",
+    "icon": "pi pi-folder",
+    "roles": ["ADMIN"],
+    "active": false
+  },
+  {
+    "name": "Economia",
+    "path": "/portal/money",
+    "icon": "pi pi-money-bill",
+    "roles": ["ADMIN"],
+    "active": false
+  },
+  {
+    "name": "Auditoria",
+    "path": "/portal/audit",
+    "icon": "pi pi-file",
+    "roles": ["ADMIN"],
+    "active": false
+  },
+  {
+    "name": "Configurações",
+    "path": "/portal/config",
+    "icon": "pi pi-cog",
+    "roles": ["ADMIN"],
+    "active": false
+  },
+  {
+    "name": "Tickets",
+    "path": "/portal/tickets",
+    "icon": "pi pi-ticket",
+    "roles": ["ADMIN"],
+    "active": false
+  },
+  {
+    "name": "Relatórios",
+    "path": "/portal/report",
+    "icon": "pi pi-chart-line",
+    "roles": ["ADMIN"],
+    "active": false
+  },
+  {
+    "name": "Alertas",
+    "path": "/portal/alerts",
+    "icon": "pi pi-bell",
+    "roles": ["ADMIN"],
+    "active": false
+  }
+]

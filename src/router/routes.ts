@@ -50,11 +50,6 @@ const routes: RouteRecordRaw[] = [
         path: '/profile/:username',
         name: 'Profile',
         component: () => import('@/views/app/ProfileView.vue')
-      },
-      {
-        path: '/validate-payment',
-        name: 'ValidatePayment',
-        component: () => import('@/views/portal/ValidatePaymentView.vue')
       }
     ]
   },
@@ -76,6 +71,11 @@ const routes: RouteRecordRaw[] = [
         path: '/portal/punishments',
         name: 'PortalPunishment',
         component: () => import('@/views/portal/PunishmentView.vue')
+      },
+      {
+        path: '/portal/validate-payment',
+        name: 'ValidatePayment',
+        component: () => import('@/views/portal/ValidatePaymentView.vue')
       }
     ]
   }
