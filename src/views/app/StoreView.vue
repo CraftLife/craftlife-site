@@ -1,30 +1,19 @@
 <template>
-  <div class="flex gap-2 overflow-x-auto">
-    <Card class="w-full cursor-pointer" @click="selectedCategorie = categorie" v-for="categorie in categories">
-      <template #content>
-        <div class="flex items-center gap-2">
-          <i class="text-xl" :class="categorie.icon"></i>
-          <span class="text-nowrap">{{ categorie.name }}</span>
-        </div>
-      </template>
-    </Card>
-  </div>
-
-  <Card class="mt-2" v-if="selectedCategorie">
+  <Card class="mt-2" v-if="selectedCategory">
     <template #header>
       <div class="flex items-center gap-3 border-dashed border-b-2 surface-border p-4">
-        <i class="text-6xl" :class="selectedCategorie.icon" :style="{ color: selectedCategorie.iconColor }"></i>
+        <i class="text-6xl" :class="selectedCategory.icon" :style="{ color: selectedCategory.iconColor }"></i>
         <div>
-          <h1 class="m-0 text-2xl">{{ selectedCategorie.title }}</h1>
+          <h1 class="m-0 text-2xl">{{ selectedCategory.title }}</h1>
           <p class="m-0 text-surface-600">
-            {{ selectedCategorie.description }}
+            {{ selectedCategory.description }}
           </p>
         </div>
       </div>
     </template>
     <template #content>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        <Card pt:body:class="p-3" v-for="product in selectedCategorie.products">
+        <Card pt:body:class="p-3" v-for="product in selectedCategory.products">
           <template #content>
             <div class="flex flex-col gap-3">
               <img
@@ -106,29 +95,29 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import { useFetch, useFormatter, useAuth } from '@/composables'
 import Editor from '@tinymce/tinymce-vue'
+import { useRoute } from 'vue-router'
 
-const categories = ref()
-const selectedCategorie = ref()
+const selectedCategory = ref()
 const selectedProduct = ref()
 const modalSummaryVisible = ref(false)
+const route = useRoute()
 
 const { formatCurrency } = useFormatter()
 const { user } = useAuth()
 
 onMounted(() => {
-  getCategories()
+  getCategory(route.query.categoryId as string)
 })
 
-const getCategories = () => {
-  useFetch('category')
+const getCategory = (categoryId: string) => {
+  useFetch(`category/${categoryId}`)
     .get()
     .json()
     .then(({ data }) => {
-      categories.value = data.value
-      selectedCategorie.value = data.value[0]
+      selectedCategory.value = data.value
     })
 }
 
@@ -147,4 +136,11 @@ const updateSummary = () => {
 }
 
 const tinyMCEKey = computed(() => process.env.VITE_TINYMCE_KEY)
+
+watch(
+  () => route.query,
+  (newQuery) => {
+    getCategory(newQuery.categoryId as string)
+  }
+)
 </script>

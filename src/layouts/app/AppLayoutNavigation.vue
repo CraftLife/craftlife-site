@@ -1,16 +1,10 @@
 <template>
   <nav>
     <Menubar pt:root:class="max-w-6xl mx-auto" :model="computedLinks">
-      <template #item="{ item, props }">
-        <RouterLink :to="item.to" v-ripple class="flex items-center" v-bind="props.action">
-          <span :class="item.icon" />
-          <span class="ml-1">{{ item.label }}</span>
-        </RouterLink>
-      </template>
       <template #end>
         <SplitButton v-if="user" :label="user.username" :model="profileActions" />
         <RouterLink v-else to="/login">
-          <Button icon="pi pi-sign-in" label="Entrar"></Button>
+          <Button icon="pi pi-sign-in" label="Entrar" size="small"></Button>
         </RouterLink>
       </template>
     </Menubar>
@@ -18,53 +12,81 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useAuth } from '@/composables'
+import { useRouter } from 'vue-router'
+import axios from '@/plugins/axios'
+import { MenuItem } from 'primevue/menuitem'
 
 const { user, logout } = useAuth()
+const router = useRouter()
 
-// const links = [
-//   { name: 'Início', to: '/' },
-//   { name: 'Loja', to: '/loja' },
-//   { name: 'Regras', to: 'https://williamestrela.gitbook.io/craftlife-ajuda/regras' },
-//   { name: 'Discord', to: 'https://discord.gg/txW4A47Dx6' },
-//   { name: 'Contato', to: '/contact' },
-//   { name: 'Punições', to: '/punishments', roles: ['STAFF', 'ADMIN'] }
-// ]
+const links = ref<MenuItem[]>([])
 
-const links = ref([
-  {
-    label: 'INÍCIO',
-    icon: 'pi pi-home',
-    to: '/'
-  },
-  {
-    label: 'LOJA',
-    icon: 'pi pi-star',
-    to: '/store'
-  },
-  {
-    label: 'REGRAS',
-    icon: 'pi pi-search',
-    to: '/rules'
-  },
-  {
-    label: 'DISCORD',
-    icon: 'pi pi-discord',
-    to: '/discord'
-  },
-  {
-    label: 'CONTATO',
-    icon: 'pi pi-envelope',
-    to: '/contact'
-  },
-  {
-    label: 'PORTAL ',
-    icon: 'pi pi-gauge',
-    roles: ['DIRECTOR', 'ADMIN'],
-    to: '/portal'
-  }
-])
+onMounted(async () => {
+  const categories = await getCategories()
+
+  links.value = [
+    {
+      label: 'INÍCIO',
+      icon: 'pi pi-home',
+      command: () => {
+        router.push('/')
+      }
+    },
+    {
+      label: 'LOJA',
+      icon: 'pi pi-star',
+      items: convertCategoriesToMenuItems(categories)
+    },
+    {
+      label: 'REGRAS',
+      icon: 'pi pi-search',
+      command: () => {
+        router.push('/rules')
+      }
+    },
+    {
+      label: 'DISCORD',
+      icon: 'pi pi-discord',
+      command: () => {
+        router.push('/discord')
+      }
+    },
+    {
+      label: 'CONTATO',
+      icon: 'pi pi-envelope',
+      command: () => {
+        router.push('/contact')
+      }
+    },
+    {
+      label: 'PORTAL ',
+      icon: 'pi pi-gauge',
+      roles: ['DIRECTOR', 'ADMIN'],
+      command: () => {
+        router.push('/portal')
+      }
+    }
+  ]
+})
+
+const getCategories = async () => {
+  return (await axios.get('category')).data
+}
+
+const convertCategoriesToMenuItems = (categories: any) => {
+  return categories.map((category: any) => ({
+    label: category.name,
+    icon: category.icon,
+    items: category.childrenCategories ? convertCategoriesToMenuItems(category.childrenCategories) : null,
+    command: category.childrenCategories
+      ? null
+      : () => {
+          router.push(`/store?categoryId=${category.id}`)
+        }
+  }))
+}
 
 const computedLinks = computed(() => {
   return links.value.filter((link) => {

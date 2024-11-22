@@ -18,13 +18,13 @@
       <i class="pi pi-chevron-down ml-auto"></i>
     </div>
     <ul class="list-none border-l border-gray-400 ml-3 pl-3 overflow-hidden hidden">
-      <template v-for="item in item.children">
-        <PortalLayoutSidebarMenuItem v-if="item.active" :item="item" />
+      <template v-for="child in item.children">
+        <PortalLayoutSidebarMenuItem v-if="child.active" :item="child" />
       </template>
     </ul>
   </li>
 
-  <li v-else class="cursor-pointer">
+  <li v-else-if="item.path" class="cursor-pointer">
     <RouterLink :to="item.path" class="hover:bg-primary-100 px-3 py-2 rounded-lg flex items-center gap-2" v-ripple>
       <i :class="item.icon"></i>
       <span>

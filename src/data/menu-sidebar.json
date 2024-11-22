@@ -19,6 +19,13 @@
     "roles": ["ADMIN"],
     "children": [
       {
+        "name": "Produtos",
+        "path": "/portal",
+        "icon": "pi pi-tag",
+        "roles": ["ADMIN"],
+        "active": true
+      },
+      {
         "name": "Ativação",
         "path": "/portal/validate-payment",
         "icon": "pi pi-check",
